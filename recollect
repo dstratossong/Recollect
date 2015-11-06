@@ -1,0 +1,48 @@
+#!/bin/bash
+
+
+function usage {
+	>&2 echo "Usage $0 [new|all]"
+	exit 1
+}
+
+
+if [ $# -ne 1 ]; then
+	usage
+fi
+
+argument=$1
+folder=~/.recollect/
+date=`date +"%Y-%m-%d"`
+filename="${folder}entry-${date}.txt"
+
+case $argument in
+new)
+	mkdir -p $folder
+
+	echo "Entry: ${date}"
+	echo "Entry: ${date}" >> $filename
+	
+	echo "Press Ctrl+D to finish"
+
+	echo
+	echo >> $filename
+
+	cat >> $filename
+	echo
+	echo >> $filename
+	echo >> $filename
+	;;
+all)
+	for entry in `ls ${folder}`; do
+		cat "${folder}${entry}"
+		echo
+	done
+	;;
+*)
+	usage
+	;;
+esac
+
+
+
