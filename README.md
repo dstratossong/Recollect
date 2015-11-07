@@ -11,3 +11,11 @@ Note: This repository has been changed to be the product of David Song and Arsha
 - Cordova Ionic
 - Gulp
 
+
+```
+npm install              # installing more dependencies
+
+```
+
+
+
