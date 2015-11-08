@@ -5,7 +5,8 @@ angular.module('recollect')
   $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|tel):/);
 })
 
-.controller('NewCtrl', function ($scope, Camera) {
+.controller('NewCtrl', ['$scope', 'Camera', '$localstorage', 
+                        function ($scope, Camera, $localstorage) {
 
   $scope.getPhoto = function () {
     var options = {
@@ -18,8 +19,10 @@ angular.module('recollect')
 
     Camera.getPicture(options).then(function (imageURI) {
       $scope.lastPhoto = imageURI;
+
     }, function (err) {
       alert("Error! " + err);
     });
   };
-});
+}]);
+

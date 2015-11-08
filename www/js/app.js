@@ -6,7 +6,7 @@
  **/
 var recollect = angular.module('recollect', ['ionic']);
 
-angular.module('recollect', ['ionic', 'util.camera'])
+angular.module('recollect', ['ionic', 'util.camera', 'util.storage'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
