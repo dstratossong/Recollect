@@ -9088,3 +9088,42 @@ a.button {
   opacity: 0;
   -webkit-transition-duration: 0s;
   transition-duration: 0s; }
+
+@font-face {
+  font-family: source-pro;
+  src: url("../fonts/Source_Sans_Pro/SourceSansPro-Regular.ttf") format("truetype");
+  font-style: regular;
+  font-weight: 400; }
+
+body {
+  font-family: source-pro; }
+
+.title {
+  font-size: 20px; }
+
+.full-page, .scroll {
+  height: 100%;
+  width: 100%; }
+
+.showcase .image {
+  background-color: black;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  -webkit-transition: background 400ms ease-in;
+  -moz-transition: background 400ms ease-in;
+  -o-transition: background 400ms ease-in;
+  transition: background 400ms ease-in;
+  text-align: center; }
+  .showcase .image .caption {
+    position: absolute;
+    bottom: 30%;
+    right: 10%;
+    width: 40%;
+    z-index: 4;
+    color: white;
+    padding: 20px 0;
+    display: block;
+    background-color: rgba(0, 0, 0, 0.4);
+    font-size: 24px;
+    line-height: 28px; }

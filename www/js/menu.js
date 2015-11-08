@@ -10,8 +10,8 @@ angular.module('recollect')
                         function($scope, Camera, $localstorage, $state) {
 
   $scope.menuItems = [
-    {'name': 'Showcase', 'state': 'app.showcase'}, 
-    {'name': 'Capture', 'state': 'app.home', 'clickHandler': 'getPhoto()'}
+    {'name': 'Showcase', 'state': 'app.showcase', 'iconClass': 'ion-play'}, 
+    {'name': 'Capture', 'state': 'app.home', 'iconClass' : 'ion-camera', 'clickHandler': 'getPhoto()'}
   ];
 
   $scope.getPhoto = function () {
@@ -25,7 +25,7 @@ angular.module('recollect')
       $localstorage.set('new-photo', imageURI);
       $state.go("app.new");
     }, function (error) {
-      alert("Error! " + error);
+      // alert("Error! " + error);
     });
   };
 

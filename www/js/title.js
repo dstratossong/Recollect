@@ -5,6 +5,7 @@
  *
  **/
 angular.module('recollect')
-  .controller("titleCtl", ['$scope', function($scope) {
+
+.controller("titleCtl", ['$scope', function($scope) {
   $scope.title = "Recollect";
 }]);
