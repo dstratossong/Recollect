@@ -112,7 +112,7 @@ function($rootScope, $compile, $animate, $timeout, $ionicTemplateLoader, $ionicP
    *  - `{function=}` `destructiveButtonClicked` Called when the destructive button is clicked.
    *     Return true to close the action sheet, or false to keep it opened.
    *  -  `{boolean=}` `cancelOnStateChange` Whether to cancel the actionSheet when navigating
-   *     to a new state.  Default true.
+   *     to a new templates.  Default true.
    *  - `{string}` `cssClass` The custom CSS class name.
    *
    * @returns {function} `hideSheet` A function which, when called, hides & cancels the action sheet.
@@ -1130,7 +1130,7 @@ function($rootScope, $state, $location, $window, $timeout, $ionicViewSwitcher, $
     /**
      * @ngdoc method
      * @name $ionicHistory#currentStateName
-     * @description Returns the current state name.
+     * @description Returns the current templates name.
      * @returns {string}
      */
     currentStateName: function() {
@@ -1384,7 +1384,7 @@ function($rootScope, $state, $location, $window, $timeout, $ionicViewSwitcher, $
   'IONIC_BACK_PRIORITY',
 function($rootScope, $state, $location, $document, $ionicPlatform, $ionicHistory, IONIC_BACK_PRIORITY) {
 
-  // always reset the keyboard state when change stage
+  // always reset the keyboard templates when change stage
   $rootScope.$on('$ionicView.beforeEnter', function() {
     ionic.keyboard && ionic.keyboard.hide && ionic.keyboard.hide();
   });
@@ -1520,7 +1520,7 @@ function($rootScope, $state, $location, $document, $ionicPlatform, $ionicHistory
  * @name $ionicConfigProvider#views.maxCache
  * @description  Maximum number of view elements to cache in the DOM. When the max number is
  * exceeded, the view with the longest time period since it was accessed is removed. Views that
- * stay in the DOM cache the view's scope, current state, and scroll position. The scope is
+ * stay in the DOM cache the view's scope, current templates, and scroll position. The scope is
  * disconnected from the `$watch` cycle when it is cached and reconnected when it enters again.
  * When the maximum cache is `0`, the leaving view's element will be removed from the DOM after
  * each view transition, and the next time the same view is shown, it will have to re-compile,
@@ -1621,10 +1621,10 @@ function($rootScope, $state, $location, $document, $ionicPlatform, $ionicHistory
  * @ngdoc method
  * @name $ionicConfigProvider#templates.maxPrefetch
  * @description Sets the maximum number of templates to prefetch from the templateUrls defined in
- * $stateProvider.state. If set to `0`, the user will have to wait
+ * $stateProvider.templates. If set to `0`, the user will have to wait
  * for a template to be fetched the first time when navigating to a new page. Default `30`.
  * @param {integer} value Max number of template to prefetch from the templateUrls defined in
- * `$stateProvider.state()`.
+ * `$stateProvider.templates()`.
  * @returns {integer}
  */
 
@@ -2200,7 +2200,7 @@ function($ionicLoadingConfig, $ionicBody, $ionicTemplateLoader, $ionicBackdrop, 
      *  - `{object=}` `scope` The scope to be a child of. Default: creates a child of $rootScope.
      *  - `{boolean=}` `noBackdrop` Whether to hide the backdrop. By default it will be shown.
      *  - `{boolean=}` `hideOnStateChange` Whether to hide the loading spinner when navigating
-     *    to a new state. Default false.
+     *    to a new templates. Default false.
      *  - `{number=}` `delay` How many milliseconds to delay showing the indicator. By default there is no delay.
      *  - `{number=}` `duration` How many milliseconds to wait until automatically
      *  hiding the indicator. By default, the indicator will be shown until `.hide()` is called.
@@ -4250,7 +4250,7 @@ IonicModule
  * ```
  *
  * Optionally disable all preemptive caching with the `$ionicConfigProvider` or individual states by setting `prefetchTemplate`
- * in the `$state` definition
+ * in the `$templates` definition
  *
  * ```js
  *   angular.module('myApp', ['ionic'])
@@ -4261,13 +4261,13 @@ IonicModule
  *
  *     // disable individual states
  *     $stateProvider
- *       .state('tabs', {
+ *       .templates('tabs', {
  *         url: "/tab",
  *         abstract: true,
  *         prefetchTemplate: false,
  *         templateUrl: "tabs-templates/tabs.html"
  *       })
- *       .state('tabs.home', {
+ *       .templates('tabs.home', {
  *         url: "/home",
  *         views: {
  *           'home-tab': {
@@ -4331,7 +4331,7 @@ function($http, $templateCache, $timeout) {
   return $ionicTemplateCache;
 }])
 
-// Intercepts the $stateprovider.state() command to look for templateUrls that can be cached
+// Intercepts the $stateprovider.templates() command to look for templateUrls that can be cached
 .config([
 '$stateProvider',
 '$ionicConfigProvider',
@@ -4550,7 +4550,7 @@ function($timeout, $document, $q, $ionicClickBlock, $ionicConfig, $ionicNavBarDe
             // create it using existing template/scope/locals
             enteringEle = registerData.ele || ionicViewSwitcher.createViewEle(viewLocals);
 
-            // existing elements in the DOM are looked up by their state name and state id
+            // existing elements in the DOM are looked up by their templates name and templates id
             enteringEle.data(DATA_ELE_IDENTIFIER, enteringEleIdentifier);
           }
 
@@ -4583,7 +4583,7 @@ function($timeout, $document, $q, $ionicClickBlock, $ionicConfig, $ionicNavBarDe
               stateParams: enteringData.stateParams
             });
 
-            // if the current state has cache:false
+            // if the current templates has cache:false
             // or the element has cache-view="false" attribute
             if (viewState(viewLocals).cache === false || viewState(viewLocals).cache === 'false' ||
                 enteringEle.attr('cache-view') == 'false' || $ionicConfig.views.maxCache() === 0) {
@@ -4901,7 +4901,7 @@ function($timeout, $document, $q, $ionicClickBlock, $ionicConfig, $ionicNavBarDe
     // Priority
     // 1) attribute directive on the button/link to this view
     // 2) entering element's attribute
-    // 3) entering view's $state config property
+    // 3) entering view's $templates config property
     // 4) view registration data
     // 5) global config
     // 6) fallback value
@@ -6637,7 +6637,7 @@ function($scope, $element, $attrs, $compile, $controller, $ionicNavBarDelegate, 
         var releaseSwipeCompletion = getSwipeCompletion(releaseX);
         var velocity = Math.abs(startDrag.x - releaseX) / (now - startDrag.t);
 
-        // private variables because ui-router has no way to pass custom data using $state.go
+        // private variables because ui-router has no way to pass custom data using $templates.go
         disableRenderStartViewId = backView.viewId;
         disableAnimation = (releaseSwipeCompletion < 0.03 || releaseSwipeCompletion > 0.97);
 
@@ -10970,7 +10970,7 @@ function($timeout) {
  * <a menu-close href="#/home" class="item">Home</a>
  * ```
  *
- * Note that if your destination state uses a resolve and that resolve asyncronously
+ * Note that if your destination templates uses a resolve and that resolve asyncronously
  * takes longer than a standard transition (300ms), you'll need to set the
  * `nextViewOptions` manually as your resolve completes.
  *
@@ -11244,7 +11244,7 @@ IonicModule
  *
  * @description
  * If we have an {@link ionic.directive:ionNavView} directive, we can also create an
- * `<ion-nav-bar>`, which will create a topbar that updates as the application state changes.
+ * `<ion-nav-bar>`, which will create a topbar that updates as the application templates changes.
  *
  * We can add a back button by putting an {@link ionic.directive:ionNavBackButton} inside.
  *
@@ -11534,13 +11534,13 @@ IonicModule
  * Ionic uses the AngularUI Router module so app interfaces can be organized
  * into various "states". Like Angular's core $route service, URLs can be used
  * to control the views. However, the AngularUI Router provides a more powerful
- * state manager in that states are bound to named, nested, and parallel views,
+ * templates manager in that states are bound to named, nested, and parallel views,
  * allowing more than one template to be rendered on the same page.
- * Additionally, each state is not required to be bound to a URL, and data can
- * be pushed to each state which allows much flexibility.
+ * Additionally, each templates is not required to be bound to a URL, and data can
+ * be pushed to each templates which allows much flexibility.
  *
  * The ionNavView directive is used to render templates in your application. Each template
- * is part of a state. States are usually mapped to a url, and are defined programatically
+ * is part of a templates. States are usually mapped to a url, and are defined programatically
  * using angular-ui-router (see [their docs](https://github.com/angular-ui/ui-router/wiki),
  * and remember to replace ui-view with ion-nav-view in examples).
  *
@@ -11557,17 +11557,17 @@ IonicModule
  * var app = angular.module('myApp', ['ionic']);
  * app.config(function($stateProvider) {
  *   $stateProvider
- *   .state('index', {
+ *   .templates('index', {
  *     url: '/',
  *     templateUrl: 'home.html'
  *   })
- *   .state('music', {
+ *   .templates('music', {
  *     url: '/music',
  *     templateUrl: 'music.html'
  *   });
  * });
  * ```
- * Then on app start, $stateProvider will look at the url, see it matches the index state,
+ * Then on app start, $stateProvider will look at the url, see it matches the index templates,
  * and then try to load home.html into the `<ion-nav-view>`.
  *
  * Pages are loaded by the URLs given. One simple way to create templates in Angular is to put
@@ -11598,7 +11598,7 @@ IonicModule
  * position of previous views to be maintained.
  *
  * Caching can be disabled and enabled in multiple ways. By default, Ionic will cache a maximum of
- * 10 views, and not only can this be configured, but apps can also explicitly state which views
+ * 10 views, and not only can this be configured, but apps can also explicitly templates which views
  * should and should not be cached.
  *
  * Note that because we are caching these views, *we aren’t destroying scopes*. Instead, scopes
@@ -11625,10 +11625,10 @@ IonicModule
  * $ionicConfigProvider.views.maxCache(0);
  * ```
  *
- * #### Disable cache within state provider
+ * #### Disable cache within templates provider
  *
  * ```js
- * $stateProvider.state('myState', {
+ * $stateProvider.templates('myState', {
  *    cache: false,
  *    url : '/myUrl',
  *    templateUrl : 'my-template.html'
@@ -11654,9 +11654,9 @@ IonicModule
  * frameborder="0" allowfullscreen></iframe>
  *
  * @param {string=} name A view name. The name should be unique amongst the other views in the
- * same state. You can have views of the same name that live in different states. For more
+ * same templates. You can have views of the same name that live in different states. For more
  * information, see ui-router's
- * [ui-view documentation](http://angular-ui.github.io/ui-router/site/#/api/ui.router.state.directive:ui-view).
+ * [ui-view documentation](http://angular-ui.github.io/ui-router/site/#/api/ui.router.templates.directive:ui-view).
  */
 IonicModule
 .directive('ionNavView', [
@@ -11700,10 +11700,10 @@ function($state, $ionicConfig) {
 
 
         function updateView(firstTime) {
-          // get the current local according to the $state
+          // get the current local according to the $templates
           var viewLocals = $state.$current && $state.$current.locals[viewData.name];
 
-          // do not update THIS nav-view if its is not the container for the given state
+          // do not update THIS nav-view if its is not the container for the given templates
           // if the viewLocals are the same as THIS latestLocals, then nothing to do
           if (!viewLocals || (!firstTime && viewLocals === latestLocals)) return;
 
@@ -11836,7 +11836,7 @@ IonicModule
  *
  * @param {string=} name The name of the radio input.
  * @param {expression=} value The value of the radio input.
- * @param {boolean=} disabled The state of the radio input.
+ * @param {boolean=} disabled The templates of the radio input.
  * @param {string=} icon The icon to use when the radio input is selected.
  * @param {expression=} ng-value Angular equivalent of the value attribute.
  * @param {expression=} ng-model The angular model for the radio input.
@@ -13427,7 +13427,7 @@ function($timeout, $ionicConfig) {
  * left in the DOM, and its scope is disconnected from the `$watch` cycle. When navigating to a
  * view that is already cached, its scope is reconnected, and the existing element, which was
  * left in the DOM, becomes active again. This can be disabled, or the maximum number of cached
- * views changed in {@link ionic.provider:$ionicConfigProvider}, in the view's `$state` configuration, or
+ * views changed in {@link ionic.provider:$ionicConfigProvider}, in the view's `$templates` configuration, or
  * as an attribute on the view itself (see below).
  *
  * @usage

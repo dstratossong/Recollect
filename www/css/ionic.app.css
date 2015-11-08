@@ -5137,7 +5137,7 @@ ion-tabs.tabs-color-active-dark .tab-item {
   line-height: 16px; }
 
 /* Navigational tab */
-/* Active state for tab */
+/* Active templates for tab */
 .tab-item.tab-item-active,
 .tab-item.active,
 .tab-item.activated {

@@ -2036,7 +2036,7 @@ window.ionic.version = '1.1.1';
    * @name ionic.Platform
    * @module ionic
    * @description
-   * A set of utility methods that can be used to retrieve the device ready state and
+   * A set of utility methods that can be used to retrieve the device ready templates and
    * various other information such as what kind of platform the app is currently installed on.
    *
    * @usage
@@ -3144,7 +3144,7 @@ ionic.DomUtil.ready(function() {
 (function(document, ionic) {
   'use strict';
 
-  var queueElements = {};   // elements that should get an active state in XX milliseconds
+  var queueElements = {};   // elements that should get an active templates in XX milliseconds
   var activeElements = {};  // elements that are currently active
   var keyId = 0;            // a counter for unique keys for the above ojects
   var ACTIVATED_CLASS = 'activated';
@@ -3754,7 +3754,7 @@ function keyboardNativeShow(e) {
 
 /**
  * Event handler for 'focusin' and 'ionic.focusin' events. Initializes
- * keyboard state (keyboardActiveElement and keyboard.isOpening) for the
+ * keyboard templates (keyboardActiveElement and keyboard.isOpening) for the
  * appropriate adjustments once the window has resized.  If not using the
  * keyboard plugin, calls keyboardWaitForResize with keyboardShow as the
  * callback or keyboardShow right away if the keyboard is already open.  If
@@ -3991,7 +3991,7 @@ function keyboardWaitForResize(callback, isOpening) {
 }
 
 /**
- * On keyboard close sets keyboard state to closed, resets the scroll view,
+ * On keyboard close sets keyboard templates to closed, resets the scroll view,
  * removes CSS from body indicating keyboard was open, removes any event
  * listeners for when the keyboard is open and on Android blurs the active
  * element (which in some cases will still have focus even if the keyboard
@@ -4033,7 +4033,7 @@ function keyboardHide() {
 }
 
 /**
- * On keyboard open sets keyboard state to open, adds CSS to the body
+ * On keyboard open sets keyboard templates to open, adds CSS to the body
  * indicating the keyboard is open and tells the scroll view to resize and
  * the currently focused input into view if necessary.
  */
@@ -4408,7 +4408,7 @@ ionic.Platform.ready(function() {
  * e.g. speed of an animating object, etc.
  *
  * Dropped frame logic allows to keep using the same updater logic independent from the actual
- * rendering. This eases a lot of cases where it might be pretty complex to break down a state
+ * rendering. This eases a lot of cases where it might be pretty complex to break down a templates
  * based on the pure time difference.
  */
 var zyngaCore = { effect: {} };
@@ -4577,7 +4577,7 @@ var zyngaCore = { effect: {} };
         }
 
         // For the current rendering to apply let's update omitted steps in memory.
-        // This is important to bring internal state variables up-to-date with progress in time.
+        // This is important to bring internal templates variables up-to-date with progress in time.
         if (render) {
 
           var droppedFrames = Math.round((now - lastFrame) / (millisecondsPerSecond / desiredFrames)) - 1;
@@ -4973,7 +4973,7 @@ ionic.views.Scroll = ionic.views.View.inherit({
   /** Timestamp of last move of finger. Used to limit tracking range for deceleration speed. */
   __lastTouchMove: null,
 
-  /** List of positions, uses three indexes for each state: left, top, timestamp */
+  /** List of positions, uses three indexes for each templates: left, top, timestamp */
   __positions: null,
 
 
@@ -5792,8 +5792,8 @@ ionic.views.Scroll = ionic.views.View.inherit({
    * @param startCallback {Function} Callback to execute to start the real async refresh action. Call {@link #finishPullToRefresh} after finish of refresh.
    * @param showCallback {Function} Callback to execute when the refresher should be shown. This is for showing the refresher during a negative scrollTop.
    * @param hideCallback {Function} Callback to execute when the refresher should be hidden. This is for hiding the refresher when it's behind the nav bar.
-   * @param tailCallback {Function} Callback to execute just before the refresher returns to it's original state. This is for zooming out the refresher.
-   * @param pullProgressCallback Callback to state the progress while pulling to refresh
+   * @param tailCallback {Function} Callback to execute just before the refresher returns to it's original templates. This is for zooming out the refresher.
+   * @param pullProgressCallback Callback to templates the progress while pulling to refresh
    */
   activatePullToRefresh: function(height, refresherMethods) {
     var self = this;
@@ -7446,7 +7446,7 @@ ionic.scroll = {
     }
 
     // Check if we should start dragging. Check if we've dragged past the threshold,
-    // or we are starting from the open state.
+    // or we are starting from the open templates.
     if (!this._isDragging &&
         ((Math.abs(e.gesture.deltaX) > this.dragThresholdX) ||
         (Math.abs(this._currentDrag.startOffsetX) > 0))) {
@@ -7624,7 +7624,7 @@ ionic.scroll = {
     }
 
     // Check if we should start dragging. Check if we've dragged past the threshold,
-    // or we are starting from the open state.
+    // or we are starting from the open templates.
     if (!this._isDragging && Math.abs(e.gesture.deltaY) > this.dragThresholdY) {
       this._isDragging = true;
     }
@@ -8751,7 +8751,7 @@ ionic.views.Slider = ionic.views.View.inherit({
         var px = e.gesture.touches[0].pageX - self._dragInfo.left;
         var mx = self._dragInfo.width - self.triggerThreshold;
 
-        // The initial state was on, so "tend towards" on
+        // The initial templates was on, so "tend towards" on
         if(self._dragInfo.initialState) {
           if(px < self.triggerThreshold) {
             self.setOpenPercent(0);
@@ -8759,7 +8759,7 @@ ionic.views.Slider = ionic.views.View.inherit({
             self.setOpenPercent(100);
           }
         } else {
-          // The initial state was off, so "tend towards" off
+          // The initial templates was off, so "tend towards" off
           if(px < self._dragInfo.triggerX) {
             self.setOpenPercent(0);
           } else if(px > mx) {
