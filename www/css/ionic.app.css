@@ -9089,6 +9089,18 @@ a.button {
   -webkit-transition-duration: 0s;
   transition-duration: 0s; }
 
+@font-face {
+  font-family: source-pro;
+  src: url("../fonts/Source_Sans_Pro/SourceSansPro-Regular.ttf") format("truetype");
+  font-style: regular;
+  font-weight: 400; }
+
+body {
+  font-family: source-pro; }
+
+.title {
+  font-size: 20px; }
+
 .full-page, .scroll {
   height: 100%;
   width: 100%; }
@@ -9113,4 +9125,5 @@ a.button {
     padding: 20px 0;
     display: block;
     background-color: rgba(0, 0, 0, 0.4);
-    font-size: 24px; }
+    font-size: 24px;
+    line-height: 28px; }

@@ -21,6 +21,23 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 // Include all of Ionic
 @import "www/lib/ionic/scss/ionic";
 
+// Fonts
+
+@font-face {
+  font-family: source-pro;
+  src: url("../fonts/Source_Sans_Pro/SourceSansPro-Regular.ttf") format("truetype");
+  font-style: regular;
+  font-weight: 400;
+}
+
+body {
+  font-family: source-pro;
+}
+
+.title {
+  font-size: 20px;
+}
+
 .full-page {
   height: 100%;
   width: 100%;
@@ -47,6 +64,7 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
     text-align: center;
 
     .caption {
+
       position: absolute;
       bottom: 30%;
       right: 10%;
@@ -60,7 +78,7 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 
       background-color: rgba(0, 0, 0, 0.4);
       font-size: 24px;
-
+      line-height: 28px;
     }
 
   }
