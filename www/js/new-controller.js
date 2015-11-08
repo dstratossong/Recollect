@@ -1,11 +1,20 @@
 
 angular.module('recollect')
 
-.config(function($compileProvider){
-  $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|tel):/);
-})
+.controller('newCtl', ['$scope', '$localstorage', '$state', 
+                       function ($scope, $localstorage, $state) {
 
-.controller('NewCtrl', ['$scope', 'Camera', '$localstorage', 
-                        function ($scope, Camera, $localstorage) {
+  $scope.newPhoto = $localstorage.get("new-photo");
 
-});
+  $scope.expandText = function () {
+    var element = document.getElementById("growing-textarea");
+    element.style.height = element.scrollHeight + "px";
+  };
+
+  $scope.createMemory = function (memory) {
+    $localstorage.pushObject("memories", {filename: $scope.newPhoto,
+                                          caption: memory.caption});
+    $state.go('app.home');
+  };
+
+}]);

@@ -5,29 +5,27 @@
  *
  **/
 angular.module('recollect')
-  .controller("menuCtl", ["$scope", "Camera", function($scope, Camera) {
-  $scope.menuItems = [{
-    'name' : 'Showcase',
-    'state': 'app.showcase'
-  }, {
-    'name' : "Capture",
-    "state": "app.home",
-    "clickHandler" : "getPhoto()"
-  }];
+
+.controller("menuCtl", ["$scope", "Camera", "$localstorage", "$state", 
+                        function($scope, Camera, $localstorage, $state) {
+
+  $scope.menuItems = [
+    {'name': 'Showcase', 'state': 'app.showcase'}, 
+    {'name': 'Capture', 'state': 'app.home', 'clickHandler': 'getPhoto()'}
+  ];
 
   $scope.getPhoto = function () {
     var options = {
-      quality: 50,
-      // targetWidth: 320,
-      // targetHeight: 320,
       correctOrientation: true,
       saveToPhotoAlbum: true
     };
 
-    Camera.getPicture(options).then(function (imageURI) {
-      $scope.lastPhoto = imageURI;
-    }, function (err) {
-      alert("Error! " + err);
+    Camera.getPicture(options)
+          .then(function (imageURI) {
+      $localstorage.set('new-photo', imageURI);
+      $state.go("app.new");
+    }, function (error) {
+      alert("Error! " + error);
     });
   };
 

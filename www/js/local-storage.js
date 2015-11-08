@@ -16,9 +16,9 @@ angular.module('util.storage', [])
       return JSON.parse($window.localStorage[key] || '{}');
     },
     pushObject: function(key, object) {
-      var oldArray = JSON.parse($window.localStorage[key] || '[]');
-      var newArray = oldArray.push(object);
-      $window.localStorage[key] = JSON.stringify(newArray);
+      var theArray = JSON.parse($window.localStorage[key] || '[]');
+      theArray.push(object);
+      $window.localStorage[key] = JSON.stringify(theArray);
     }
   }
 }]);

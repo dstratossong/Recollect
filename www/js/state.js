@@ -5,7 +5,9 @@
  * using state provider.
  *
  **/
-angular.module('recollect').config(function($stateProvider, $urlRouterProvider) {
+angular.module('recollect')
+
+.config(function($stateProvider, $urlRouterProvider) {
 
   // The path to the directory that contains all the templates views
   var TEMPLATE_DIR_PATH = "templates/";
@@ -32,9 +34,16 @@ angular.module('recollect').config(function($stateProvider, $urlRouterProvider) 
           templateUrl: TEMPLATE_DIR_PATH + "showcase.html"
         }
       }
+    })
+    .state('app.new', {
+      url: "new",
+      views: {
+        'appView' : {
+          templateUrl: TEMPLATE_DIR_PATH + "new.html"
+        }
+      }
     });
 
-  // if the templates to b;;e routed to
   $urlRouterProvider.otherwise(HOME_ROUTE_URL + "home");
 
 });
