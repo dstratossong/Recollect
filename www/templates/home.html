@@ -5,7 +5,8 @@
           ng-repeat="item in menuItems"
           ui-sref="{{ item.state }}"
           ng-click="{{ item.clickHandler }}">
-          {{ item.name }}
+          <span class="{{ item.iconClass }}"></span>
+          <span>{{ item.name }}</span>
         </ion-item>
       </ion-list>
     </ion-content>
