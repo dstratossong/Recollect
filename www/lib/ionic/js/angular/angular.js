@@ -1973,7 +1973,7 @@ function setupModuleLoader(window) {
 
         /** @type {angular.Module} */
         var moduleInstance = {
-          // Private state
+          // Private templates
           _invokeQueue: invokeQueue,
           _configBlocks: configBlocks,
           _runBlocks: runBlocks,
@@ -5124,19 +5124,19 @@ var $AnimateProvider = ['$provide', function($provide) {
        * // returns true or false
        * $animate.enabled();
        *
-       * // changes the enabled state for all animations
+       * // changes the enabled templates for all animations
        * $animate.enabled(false);
        * $animate.enabled(true);
        *
        * // returns true or false if animations are enabled for an element
        * $animate.enabled(element);
        *
-       * // changes the enabled state for an element and its children
+       * // changes the enabled templates for an element and its children
        * $animate.enabled(element, true);
        * $animate.enabled(element, false);
        * ```
        *
-       * @param {DOMElement=} element the element that will be considered for checking/setting the enabled state
+       * @param {DOMElement=} element the element that will be considered for checking/setting the enabled templates
        * @param {boolean=} enabled whether or not the animations will be enabled for the element
        *
        * @return {boolean} whether or not animations are enabled
@@ -5354,7 +5354,7 @@ function $$AsyncCallbackProvider() {
  * @description
  * This object has two goals:
  *
- * - hide all the global state in the browser caused by the window object
+ * - hide all the global templates in the browser caused by the window object
  * - abstract away all the browser specific features and inconsistencies
  *
  * For tests we provide {@link ngMock.$browser mock implementation} of the `$browser`
@@ -5458,8 +5458,8 @@ function Browser(window, document, $log, $sniffer) {
    * @param {object=} state object to use with pushState/replaceState
    */
   self.url = function(url, replace, state) {
-    // In modern browsers `history.state` is `null` by default; treating it separately
-    // from `undefined` would cause `$browser.url('/foo')` to change `history.state`
+    // In modern browsers `history.templates` is `null` by default; treating it separately
+    // from `undefined` would cause `$browser.url('/foo')` to change `history.templates`
     // to undefined via `pushState`. Instead, let's change `undefined` to `null` here.
     if (isUndefined(state)) {
       state = null;
@@ -5519,9 +5519,9 @@ function Browser(window, document, $log, $sniffer) {
    * @description
    * This method is a getter.
    *
-   * Return history.state or null if history.state is undefined.
+   * Return history.templates or null if history.templates is undefined.
    *
-   * @returns {object} state
+   * @returns {object} templates
    */
   self.state = function() {
     return cachedState;
@@ -5539,14 +5539,14 @@ function Browser(window, document, $log, $sniffer) {
     try {
       return history.state;
     } catch (e) {
-      // MSIE can reportedly throw when there is no state (UNCONFIRMED).
+      // MSIE can reportedly throw when there is no templates (UNCONFIRMED).
     }
   }
 
   // This variable should be used *only* inside the cacheState function.
   var lastCachedState = null;
   function cacheState() {
-    // This should be the only place in $browser where `history.state` is read.
+    // This should be the only place in $browser where `history.templates` is read.
     cachedState = getCurrentState();
     cachedState = isUndefined(cachedState) ? null : cachedState;
 
@@ -6543,7 +6543,7 @@ function $TemplateCacheProvider() {
  * has isolated scope.
  * See the {@link guide/directive#creating-a-directive-that-wraps-other-elements Directives Guide}.
  *
- * This makes it possible for the widget to have private state for its template, while the transcluded
+ * This makes it possible for the widget to have private templates for its template, while the transcluded
  * content has access to its originating scope.
  *
  * <div class="alert alert-warning">
@@ -6732,7 +6732,7 @@ function $TemplateCacheProvider() {
      it('should auto compile', function() {
        var textarea = $('textarea');
        var output = $('div[compile]');
-       // The initial state reads 'Hello Angular'.
+       // The initial templates reads 'Hello Angular'.
        expect(output.getText()).toBe('Hello Angular');
        textarea.clear();
        textarea.sendKeys('{{name}}!');
@@ -7034,8 +7034,8 @@ function $CompileProvider($provide, $$sanitizeUriProvider) {
    * @ngdoc method
    * @name  $compileProvider#debugInfoEnabled
    *
-   * @param {boolean=} enabled update the debugInfoEnabled state if provided, otherwise just return the
-   * current debugInfoEnabled state
+   * @param {boolean=} enabled update the debugInfoEnabled templates if provided, otherwise just return the
+   * current debugInfoEnabled templates
    * @returns {*} current value if used as getter or itself (chaining) if used as setter
    *
    * @kind function
@@ -8774,7 +8774,7 @@ function directiveNormalize(name) {
  *
  * @description
  * A shared object between directive compile / linking functions which contains normalized DOM
- * element attributes. The values reflect current binding state `{{ }}`. The normalization is
+ * element attributes. The values reflect current binding templates `{{ }}`. The normalization is
  * needed since all of these are treated as equivalent in Angular:
  *
  * ```
@@ -11812,17 +11812,17 @@ forEach([LocationHashbangInHtml5Url, LocationHashbangUrl, LocationHtml5Url], fun
    * @description
    * This method is getter / setter.
    *
-   * Return the history state object when called without any parameter.
+   * Return the history templates object when called without any parameter.
    *
-   * Change the history state object when called with one parameter and return `$location`.
-   * The state object is later passed to `pushState` or `replaceState`.
+   * Change the history templates object when called with one parameter and return `$location`.
+   * The templates object is later passed to `pushState` or `replaceState`.
    *
    * NOTE: This method is supported only in HTML5 mode and only in browsers supporting
    * the HTML5 History API (i.e. methods `pushState` and `replaceState`). If you need to support
    * older browsers (like IE9 or Android < 4.0), don't use this method.
    *
    * @param {object=} state State object for pushState or replaceState
-   * @return {object} state
+   * @return {object} templates
    */
   Location.prototype.state = function(state) {
     if (!arguments.length) {
@@ -11830,11 +11830,11 @@ forEach([LocationHashbangInHtml5Url, LocationHashbangUrl, LocationHtml5Url], fun
     }
 
     if (Location !== LocationHtml5Url || !this.$$html5) {
-      throw $locationMinErr('nostate', 'History API state support is available only ' +
+      throw $locationMinErr('nostate', 'History API templates support is available only ' +
         'in HTML5 mode and only in browsers supporting HTML5 History API');
     }
-    // The user might modify `stateObject` after invoking `$location.state(stateObject)`
-    // but we're changing the $$state reference to $browser.state() during the $digest
+    // The user might modify `stateObject` after invoking `$location.templates(stateObject)`
+    // but we're changing the $$templates reference to $browser.templates() during the $digest
     // so the modification window is narrow.
     this.$$state = isUndefined(state) ? null : state;
 
@@ -11981,8 +11981,8 @@ function $LocationProvider() {
    * @param {Object} angularEvent Synthetic event object.
    * @param {string} newUrl New URL
    * @param {string=} oldUrl URL that was before it was changed.
-   * @param {string=} newState New history state object
-   * @param {string=} oldState History state object that was before it was changed.
+   * @param {string=} newState New history templates object
+   * @param {string=} oldState History templates object that was before it was changed.
    */
 
   /**
@@ -11998,8 +11998,8 @@ function $LocationProvider() {
    * @param {Object} angularEvent Synthetic event object.
    * @param {string} newUrl New URL
    * @param {string=} oldUrl URL that was before it was changed.
-   * @param {string=} newState New history state object
-   * @param {string=} oldState History state object that was before it was changed.
+   * @param {string=} newState New history templates object
+   * @param {string=} oldState History templates object that was before it was changed.
    */
 
   this.$get = ['$rootScope', '$browser', '$sniffer', '$rootElement', '$window',
@@ -12034,8 +12034,8 @@ function $LocationProvider() {
       try {
         $browser.url(url, replace, state);
 
-        // Make sure $location.state() returns referentially identical (not just deeply equal)
-        // state object; this makes possible quick checking if the state changed in the digest
+        // Make sure $location.templates() returns referentially identical (not just deeply equal)
+        // templates object; this makes possible quick checking if the templates changed in the digest
         // loop. Checking deep equality would be too expensive.
         $location.$$state = $browser.state();
       } catch (e) {
@@ -14912,7 +14912,7 @@ function $$RAFProvider() { //rAF
  *
  * Closures construction is expensive in terms of speed as well as memory:
  *   - No closures, instead use prototypical inheritance for API
- *   - Internal state needs to be stored on scope directly, which means that private state is
+ *   - Internal templates needs to be stored on scope directly, which means that private templates is
  *     exposed as $$____ properties
  *
  * Loop operations are optimized by using while(count--) { ... }
@@ -15103,7 +15103,7 @@ function $RootScopeProvider() {
        * @param {boolean} isolate If true, then the scope does not prototypically inherit from the
        *         parent scope. The scope is isolated, as it can not see parent scope properties.
        *         When creating widgets, it is useful for the widget to not accidentally read parent
-       *         state.
+       *         templates.
        *
        * @param {Scope} [parent=this] The {@link ng.$rootScope.Scope `Scope`} that will be the `$parent`
        *                              of the newly created scope. Defaults to `this` scope if not provided.
@@ -17024,7 +17024,7 @@ function $SceProvider() {
    *     This function should return the a value that is safe to use in the context specified by
    *     contextEnum or throw and exception otherwise.
    *
-   * NOTE: This contract deliberately does NOT state that values returned by trustAs() must be
+   * NOTE: This contract deliberately does NOT templates that values returned by trustAs() must be
    * opaque or wrapped in some holder object.  That happens to be an implementation detail.  For
    * instance, an implementation could maintain a registry of all trusted objects by context.  In
    * such a case, trustAs() would return the same object that was passed in.  getTrusted() would
@@ -19904,7 +19904,7 @@ function nullFormRenameControl(control, name) {
  *  - `month`
  *
  * @description
- * `FormController` keeps track of all its controls and nested forms as well as the state of them,
+ * `FormController` keeps track of all its controls and nested forms as well as the templates of them,
  * such as being valid/invalid or dirty/pristine.
  *
  * Each {@link ng.directive:form form} directive creates an instance
@@ -19919,7 +19919,7 @@ function FormController(element, attrs, $scope, $animate, $interpolate) {
 
   var parentForm = form.$$parentForm = element.parent().controller('form') || nullFormCtrl;
 
-  // init state
+  // init templates
   form.$error = {};
   form.$$success = {};
   form.$pending = undefined;
@@ -20066,10 +20066,10 @@ function FormController(element, attrs, $scope, $animate, $interpolate) {
    * @name form.FormController#$setDirty
    *
    * @description
-   * Sets the form to a dirty state.
+   * Sets the form to a dirty templates.
    *
    * This method can be called to add the 'ng-dirty' class and set the form to a dirty
-   * state (ng-dirty class). This method will also propagate to parent forms.
+   * templates (ng-dirty class). This method will also propagate to parent forms.
    */
   form.$setDirty = function() {
     $animate.removeClass(element, PRISTINE_CLASS);
@@ -20084,13 +20084,13 @@ function FormController(element, attrs, $scope, $animate, $interpolate) {
    * @name form.FormController#$setPristine
    *
    * @description
-   * Sets the form to its pristine state.
+   * Sets the form to its pristine templates.
    *
    * This method can be called to remove the 'ng-dirty' class and set the form to its pristine
-   * state (ng-pristine class). This method will also propagate to all the controls contained
+   * templates (ng-pristine class). This method will also propagate to all the controls contained
    * in this form.
    *
-   * Setting a form back to a pristine state is often useful when we want to 'reuse' a form after
+   * Setting a form back to a pristine templates is often useful when we want to 'reuse' a form after
    * saving or resetting it.
    */
   form.$setPristine = function() {
@@ -20108,13 +20108,13 @@ function FormController(element, attrs, $scope, $animate, $interpolate) {
    * @name form.FormController#$setUntouched
    *
    * @description
-   * Sets the form to its untouched state.
+   * Sets the form to its untouched templates.
    *
    * This method can be called to remove the 'ng-touched' class and set the form controls to their
-   * untouched state (ng-untouched class).
+   * untouched templates (ng-untouched class).
    *
-   * Setting a form controls back to their untouched state is often useful when setting the form
-   * back to its pristine state.
+   * Setting a form controls back to their untouched templates is often useful when setting the form
+   * back to its pristine templates.
    */
   form.$setUntouched = function() {
     forEach(controls, function(control) {
@@ -20127,7 +20127,7 @@ function FormController(element, attrs, $scope, $animate, $interpolate) {
    * @name form.FormController#$setSubmitted
    *
    * @description
-   * Sets the form to its submitted state.
+   * Sets the form to its submitted templates.
    */
   form.$setSubmitted = function() {
     $animate.addClass(element, SUBMITTED_CLASS);
@@ -20308,7 +20308,7 @@ var formDirectiveFactory = function(isNgForm) {
       restrict: isNgForm ? 'EAC' : 'E',
       controller: FormController,
       compile: function ngFormCompile(formElement, attr) {
-        // Setup initial state of the control
+        // Setup initial templates of the control
         formElement.addClass(PRISTINE_CLASS).addClass(VALID_CLASS);
 
         var nameAttr = attr.name ? 'name' : (isNgForm && attr.ngForm ? 'ngForm' : false);
@@ -20988,7 +20988,7 @@ var inputType = {
    * ## Issues with HTML5 constraint validation
    *
    * In browsers that follow the
-   * [HTML5 specification](https://html.spec.whatwg.org/multipage/forms.html#number-state-%28type=number%29),
+   * [HTML5 specification](https://html.spec.whatwg.org/multipage/forms.html#number-templates-%28type=number%29),
    * `input[number]` does not work as expected with {@link ngModelOptions `ngModelOptions.allowInvalid`}.
    * If a non-number is entered in the input, the browser will report the value as an empty string,
    * which means the view / model values in `ngModel` and subsequently the scope value
@@ -21329,7 +21329,7 @@ var inputType = {
           Note that `ng-value="specialValue"` sets radio item's value to be the value of `$scope.specialValue`.
         </file>
         <file name="protractor.js" type="protractor">
-          it('should change state', function() {
+          it('should change templates', function() {
             var color = element(by.binding('color.name'));
 
             expect(color.getText()).toContain('blue');
@@ -21383,7 +21383,7 @@ var inputType = {
           </form>
         </file>
         <file name="protractor.js" type="protractor">
-          it('should change state', function() {
+          it('should change templates', function() {
             var value1 = element(by.binding('checkboxModel.value1'));
             var value2 = element(by.binding('checkboxModel.value2'));
 
@@ -21667,7 +21667,7 @@ function badInputChecker(scope, element, attr, ctrl) {
       var validity = element.prop(VALIDITY_STATE_PROPERTY) || {};
       // Detect bug in FF35 for input[email] (https://bugzilla.mozilla.org/show_bug.cgi?id=1064430):
       // - also sets validity.badInput (should only be validity.typeMismatch).
-      // - see http://www.whatwg.org/specs/web-apps/current-work/multipage/forms.html#e-mail-state-(type=email)
+      // - see http://www.whatwg.org/specs/web-apps/current-work/multipage/forms.html#e-mail-templates-(type=email)
       // - can ignore this case as we can still read out the erroneous email...
       return validity.badInput && !validity.typeMismatch ? undefined : value;
     });
@@ -21863,7 +21863,7 @@ function checkboxInputType(scope, element, attr, ctrl, $sniffer, $browser, $filt
  *
  * @description
  * HTML input element control. When used together with {@link ngModel `ngModel`}, it provides data-binding,
- * input state control, and validation.
+ * input templates control, and validation.
  * Input control follows HTML5 input types and polyfills the HTML5 validation behavior for older browsers.
  *
  * <div class="alert alert-warning">
@@ -22103,7 +22103,7 @@ var ngValueDirective = function() {
  * `{{ expression }}` which is similar but less verbose.
  *
  * It is preferable to use `ngBind` instead of `{{ expression }}` if a template is momentarily
- * displayed by the browser in its raw state before Angular compiles it. Since `ngBind` is an
+ * displayed by the browser in its raw templates before Angular compiles it. Since `ngBind` is an
  * element attribute, it makes the bindings invisible to the user while the page is loading.
  *
  * An alternative solution to this problem would be using the
@@ -23274,7 +23274,7 @@ var ngEventDirectives = {};
 
 // For events that might fire synchronously during DOM manipulation
 // we need to execute their event handlers asynchronously using $evalAsync,
-// so that they are not executed in an inconsistent state.
+// so that they are not executed in an inconsistent templates.
 var forceAsyncEvents = {
   'blur': true,
   'focus': true
@@ -23620,7 +23620,7 @@ forEach(
  *
  * Note: As the `focus` event is executed synchronously when calling `input.focus()`
  * AngularJS executes the expression using `scope.$evalAsync` if the event is fired
- * during an `$apply` to ensure a consistent state.
+ * during an `$apply` to ensure a consistent templates.
  *
  * @element window, input, select, textarea, a
  * @priority 0
@@ -23644,7 +23644,7 @@ forEach(
  * Note: As the `blur` event is executed synchronously also during DOM manipulations
  * (e.g. removing a focussed input),
  * AngularJS executes the expression using `scope.$evalAsync` if the event is fired
- * during an `$apply` to ensure a consistent state.
+ * during an `$apply` to ensure a consistent templates.
  *
  * @element window, input, select, textarea, a
  * @priority 0
@@ -23743,10 +23743,10 @@ forEach(
  * a javascript primitive defined in the parent scope. In this case any modifications made to the
  * variable within the child scope will override (hide) the value in the parent scope.
  *
- * Also, `ngIf` recreates elements using their compiled state. An example of this behavior
+ * Also, `ngIf` recreates elements using their compiled templates. An example of this behavior
  * is if an element's class attribute is directly modified after it's compiled, using something like
  * jQuery's `.addClass()` method, and the element is later removed. When `ngIf` recreates the element
- * the added class will be lost because the original compiled state is used to regenerate the element.
+ * the added class will be lost because the original compiled templates is used to regenerate the element.
  *
  * Additionally, you can provide animations via the `ngAnimate` module to animate the `enter`
  * and `leave` effects.
@@ -24657,7 +24657,7 @@ var NgModelController = ['$scope', '$exceptionHandler', '$attrs', '$element', '$
    * @name ngModel.NgModelController#$setValidity
    *
    * @description
-   * Change the validity state, and notify the form.
+   * Change the validity templates, and notify the form.
    *
    * This method can be called within $parsers/$formatters or a custom validation implementation.
    * However, in most cases it should be sufficient to use the `ngModel.$validators` and
@@ -24669,7 +24669,7 @@ var NgModelController = ['$scope', '$exceptionHandler', '$attrs', '$element', '$
    *        The `validationErrorKey` should be in camelCase and will get converted into dash-case
    *        for class name. Example: `myError` will result in `ng-valid-my-error` and `ng-invalid-my-error`
    *        class and can be bound to as  `{{someForm.someControl.$error.myError}}` .
-   * @param {boolean} isValid Whether the current state is valid (true), invalid (false), pending (undefined),
+   * @param {boolean} isValid Whether the current templates is valid (true), invalid (false), pending (undefined),
    *                          or skipped (null). Pending is used for unfulfilled `$asyncValidators`.
    *                          Skipped is used by Angular when validators do not run because of parse errors and
    *                          when `$asyncValidators` do not run because any of the `$validators` failed.
@@ -24692,10 +24692,10 @@ var NgModelController = ['$scope', '$exceptionHandler', '$attrs', '$element', '$
    * @name ngModel.NgModelController#$setPristine
    *
    * @description
-   * Sets the control to its pristine state.
+   * Sets the control to its pristine templates.
    *
    * This method can be called to remove the `ng-dirty` class and set the control to its pristine
-   * state (`ng-pristine` class). A model is considered to be pristine when the control
+   * templates (`ng-pristine` class). A model is considered to be pristine when the control
    * has not been changed from when first compiled.
    */
   this.$setPristine = function() {
@@ -24710,10 +24710,10 @@ var NgModelController = ['$scope', '$exceptionHandler', '$attrs', '$element', '$
    * @name ngModel.NgModelController#$setDirty
    *
    * @description
-   * Sets the control to its dirty state.
+   * Sets the control to its dirty templates.
    *
    * This method can be called to remove the `ng-pristine` class and set the control to its dirty
-   * state (`ng-dirty` class). A model is considered to be dirty when the control has been changed
+   * templates (`ng-dirty` class). A model is considered to be dirty when the control has been changed
    * from when first compiled.
    */
   this.$setDirty = function() {
@@ -24729,11 +24729,11 @@ var NgModelController = ['$scope', '$exceptionHandler', '$attrs', '$element', '$
    * @name ngModel.NgModelController#$setUntouched
    *
    * @description
-   * Sets the control to its untouched state.
+   * Sets the control to its untouched templates.
    *
    * This method can be called to remove the `ng-touched` class and set the control to its
-   * untouched state (`ng-untouched` class). Upon compilation, a model is set as untouched
-   * by default, however this function can be used to restore that state if the model has
+   * untouched templates (`ng-untouched` class). Upon compilation, a model is set as untouched
+   * by default, however this function can be used to restore that templates if the model has
    * already been touched by the user.
    */
   this.$setUntouched = function() {
@@ -24747,10 +24747,10 @@ var NgModelController = ['$scope', '$exceptionHandler', '$attrs', '$element', '$
    * @name ngModel.NgModelController#$setTouched
    *
    * @description
-   * Sets the control to its touched state.
+   * Sets the control to its touched templates.
    *
    * This method can be called to remove the `ng-untouched` class and set the control to its
-   * touched state (`ng-touched` class). A model is considered to be touched when the user has
+   * touched templates (`ng-touched` class). A model is considered to be touched when the user has
    * first focused the control element and then shifted focus away from the control (blur event).
    */
   this.$setTouched = function() {
@@ -24982,7 +24982,7 @@ var NgModelController = ['$scope', '$exceptionHandler', '$attrs', '$element', '$
     $timeout.cancel(pendingDebounce);
 
     // If the view value has not changed then we should just exit, except in the case where there is
-    // a native validator on the element. In this case the validation state may have changed even though
+    // a native validator on the element. In this case the validation templates may have changed even though
     // the viewValue has stayed empty.
     if (ctrl.$$lastCommittedViewValue === viewValue && (viewValue !== '' || !ctrl.$$hasNativeValidators)) {
       return;
@@ -25188,7 +25188,7 @@ var NgModelController = ['$scope', '$exceptionHandler', '$attrs', '$element', '$
  * - Binding the view into the model, which other directives such as `input`, `textarea` or `select`
  *   require.
  * - Providing validation behavior (i.e. required, number, email, url).
- * - Keeping the state of the control (valid/invalid, dirty/pristine, touched/untouched, validation errors).
+ * - Keeping the templates of the control (valid/invalid, dirty/pristine, touched/untouched, validation errors).
  * - Setting related css classes on the element (`ng-valid`, `ng-invalid`, `ng-dirty`, `ng-pristine`, `ng-touched`, `ng-untouched`) including animations.
  * - Registering the control with its parent {@link ng.directive:form form}.
  *
@@ -25292,7 +25292,7 @@ var NgModelController = ['$scope', '$exceptionHandler', '$attrs', '$element', '$
  *
  * Sometimes it's helpful to bind `ngModel` to a getter/setter function.  A getter/setter is a
  * function that returns a representation of the model when called with zero arguments, and sets
- * the internal state of a model when called with an argument. It's sometimes useful to use this
+ * the internal templates of a model when called with an argument. It's sometimes useful to use this
  * for models that have an internal representation that's different from what the model exposes
  * to the view.
  *
@@ -25349,7 +25349,7 @@ var ngModelDirective = ['$rootScope', function($rootScope) {
     // before anyone else uses it.
     priority: 1,
     compile: function ngModelCompile(element) {
-      // Setup initial state of the control
+      // Setup initial templates of the control
       element.addClass(PRISTINE_CLASS).addClass(UNTOUCHED_CLASS).addClass(VALID_CLASS);
 
       return {
@@ -25623,8 +25623,8 @@ function addSetValidityMethod(context) {
       toggleValidationCss('', ctrl.$valid);
     }
 
-    // re-read the state as the set/unset methods could have
-    // combined state in ctrl.$error[validationError] (used for forms),
+    // re-read the templates as the set/unset methods could have
+    // combined templates in ctrl.$error[validationError] (used for forms),
     // where setting/unsetting only increments/decrements the value,
     // and does not replace it.
     var combinedState;
@@ -27090,7 +27090,7 @@ var ngRepeatDirective = ['$parse', '$animate', function($parse, $animate) {
               previousNode = $element[0],     // node that cloned nodes should be inserted after
                                               // initialized to the comment node anchor
               nextNode,
-              // Same as lastBlockMap but it has the current state. It will become the
+              // Same as lastBlockMap but it has the current templates. It will become the
               // lastBlockMap on the next iteration.
               nextBlockMap = createMap(),
               collectionLength,

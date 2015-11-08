@@ -1,3 +1,10 @@
+/**
+ *  @author   Arshan Alam
+ *
+ * The Recollect application!
+ *
+ **/
+var recollect = angular.module('recollect', ['ionic']);
 
 angular.module('recollect', ['ionic', 'util.camera'])
 

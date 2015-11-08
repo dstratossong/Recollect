@@ -261,7 +261,7 @@ var $$rAFSchedulerFactory = ['$$rAF', function($$rAF) {
   var cancelFn;
 
   function scheduler(tasks) {
-    // we make a copy since RAFScheduler mutates the state
+    // we make a copy since RAFScheduler mutates the templates
     // of the passed in array variable and this would be difficult
     // to track down on the outside code
     tickQueue.push([].concat(tasks));
@@ -792,7 +792,7 @@ var $AnimateCssProvider = ['$animateProvider', function($animateProvider) {
         //that all the animated elements within the animation frame will
         //be properly updated and drawn on screen. This is required to
         //ensure that the preparation animation is properly flushed so that
-        //the active state picks up from there. DO NOT REMOVE THIS LINE.
+        //the active templates picks up from there. DO NOT REMOVE THIS LINE.
         //DO NOT OPTIMIZE THIS LINE. THE MINIFIER WILL REMOVE IT OTHERWISE WHICH
         //WILL RESULT IN AN UNPREDICTABLE BUG THAT IS VERY HARD TO TRACK DOWN AND
         //WILL TAKE YEARS AWAY FROM YOUR LIFE.
@@ -2281,7 +2281,7 @@ var $$AnimateQueueProvider = ['$animateProvider', function($animateProvider) {
           }
 
           // in the event that the element animation was not cancelled or a follow-up animation
-          // isn't allowed to animate from here then we need to clear the state of the element
+          // isn't allowed to animate from here then we need to clear the templates of the element
           // so that any future animations won't read the expired animation data.
           if (!isValidAnimation) {
             clearElementAnimationState(element);
@@ -3101,7 +3101,7 @@ var $$AnimationProvider = ['$animateProvider', function($animateProvider) {
  * </style>
  * ```
  *
- * All that is going on here with ngShow/ngHide behind the scenes is the `.ng-hide` class is added/removed (when the hidden state is valid). Since
+ * All that is going on here with ngShow/ngHide behind the scenes is the `.ng-hide` class is added/removed (when the hidden templates is valid). Since
  * ngShow and ngHide are animation aware then we can match up a transition and ngAnimate handles the rest.
  *
  * In addition the addition and removal of the CSS class, ngAnimate also provides two helper methods that we can use to further decorate the animation

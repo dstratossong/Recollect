@@ -1,0 +1,9 @@
+<ion-view ng-controller="titleCtl" title="{{ title }}">
+    <ion-content>
+      <ion-list ng-controller="menuCtl">
+        <ion-item ng-repeat="item in menuItems" ui-sref="{{ item.state }}">
+          {{ item.name }}
+        </ion-item>
+      </ion-list>
+    </ion-content>
+</ion-view>
