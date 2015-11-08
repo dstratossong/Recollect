@@ -1,7 +1,7 @@
 
 angular.module('util.interval', [])
 
-.factory('Interval', function($interval){
+.factory('Interval', function ($interval) {
   var clock = null;
   var service = {
     startClock: function (fn) {

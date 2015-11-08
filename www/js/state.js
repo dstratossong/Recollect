@@ -42,8 +42,16 @@ angular.module('recollect')
           templateUrl: TEMPLATE_DIR_PATH + "new.html"
         }
       }
+    })
+    .state('app.about', {
+      url: "about",
+      views: {
+        'appView' : {
+          templateUrl: TEMPLATE_DIR_PATH + "about.html"
+        }
+      }
     });
-
+    
   $urlRouterProvider.otherwise(HOME_ROUTE_URL + "home");
 
 });
