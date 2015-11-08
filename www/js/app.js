@@ -6,7 +6,10 @@
  **/
 var recollect = angular.module('recollect', ['ionic']);
 
-angular.module('recollect', ['ionic', 'util.camera', 'util.storage'])
+angular.module('recollect', ['ionic', 
+                             'util.camera', 
+                             'util.storage', 
+                             'util.interval'])
 
 .config(function($compileProvider){
   $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|tel):/);
