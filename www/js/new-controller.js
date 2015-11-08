@@ -1,25 +1,20 @@
 
 angular.module('recollect')
 
-.config(function($compileProvider){
-  $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|tel):/);
-})
+.controller('newCtl', ['$scope', '$localstorage', '$state', 
+                       function ($scope, $localstorage, $state) {
 
-.controller('NewCtrl', function ($scope, Camera) {
+  $scope.newPhoto = $localstorage.get("new-photo");
 
-  $scope.getPhoto = function () {
-    var options = {
-      quality: 50,
-      // targetWidth: 320,
-      // targetHeight: 320,
-      correctOrientation: true,
-      saveToPhotoAlbum: true
-    };
-
-    Camera.getPicture(options).then(function (imageURI) {
-      $scope.lastPhoto = imageURI;
-    }, function (err) {
-      alert("Error! " + err);
-    });
+  $scope.expandText = function () {
+    var element = document.getElementById("growing-textarea");
+    element.style.height = element.scrollHeight + "px";
   };
-});
+
+  $scope.createMemory = function (memory) {
+    $localstorage.pushObject("memories", {filename: $scope.newPhoto,
+                                          caption: memory.caption});
+    $state.go('app.home');
+  };
+
+}]);

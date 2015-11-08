@@ -1,0 +1,20 @@
+<ion-view title="New Memory">
+  <ion-content ng-controller="newCtl">
+
+    <img ng-src="{{ newPhoto }}" style="max-width: 100%; max-height: 70%; margin-left: auto; margin-right: auto;" />
+
+    <form ng-submit="createMemory(memory)">
+      <label class="item item-input">
+        <textarea 
+          placeholder="Enter Notes"
+          id="growing-textarea"
+          ng-model="memory.caption"
+          ng-keyup="expandText()"
+          ng-keydown="expandText()">
+        </textarea> 
+      </label>
+      <button type="submit" class="button button-block button-positive">Create Task</button>
+    </form>
+
+  </ion-content>
+</ion-view>
