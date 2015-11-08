@@ -12,7 +12,7 @@ angular.module('recollect')
   };
 
   $scope.createMemory = function (memory) {
-    $localstorage.pushObject("memories", {filename: $scope.newPhoto,
+    $localstorage.unshiftObject("memories", {filename: $scope.newPhoto,
                                           caption: memory.caption});
     $state.go('app.home');
   };

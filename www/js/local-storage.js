@@ -15,9 +15,17 @@ angular.module('util.storage', [])
     getObject: function(key) {
       return JSON.parse($window.localStorage[key] || '{}');
     },
+    getArray: function(key) {
+      return JSON.parse($window.localStorage[key] || '[]');
+    },
     pushObject: function(key, object) {
       var theArray = JSON.parse($window.localStorage[key] || '[]');
       theArray.push(object);
+      $window.localStorage[key] = JSON.stringify(theArray);
+    },
+    unshiftObject: function(key, object) {
+      var theArray = JSON.parse($window.localStorage[key] || '[]');
+      theArray.unshift(object);
       $window.localStorage[key] = JSON.stringify(theArray);
     }
   }
