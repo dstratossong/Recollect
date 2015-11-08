@@ -11,7 +11,6 @@ angular.module('recollect').config(function($stateProvider, $urlRouterProvider) 
   var TEMPLATE_DIR_PATH = "templates/";
   var HOME_ROUTE_URL = "/";
 
-
   $stateProvider
     .state('app', {
       abstract: true,
@@ -26,33 +25,15 @@ angular.module('recollect').config(function($stateProvider, $urlRouterProvider) 
         }
       }
     })
-    .state('app.test', {
-      url: "test",
+    .state('app.showcase', {
+      url: "showcase",
       views: {
         'appView' : {
-          templateUrl: TEMPLATE_DIR_PATH + "test.html"
+          templateUrl: TEMPLATE_DIR_PATH + "showcase.html"
         }
       }
     });
 
-
-
-  /*
-
-
-  $stateProvider
-    .state('home', {
-      url: HOME_ROUTE_URL,
-      templateUrl: TEMPLATE_DIR_PATH + "home.html"
-
-    })
-    .state('settings', {
-      url: HOME_ROUTE_URL,
-      templateUrl: TEMPLATE_DIR_PATH + "app.html"
-
-    });
-
-*/
   // if the templates to b;;e routed to
   $urlRouterProvider.otherwise(HOME_ROUTE_URL + "home");
 
