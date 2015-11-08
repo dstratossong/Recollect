@@ -25,7 +25,7 @@ angular.module('recollect')
       $localstorage.set('new-photo', imageURI);
       $state.go("app.new");
     }, function (error) {
-      alert("Error! " + error);
+      // alert("Error! " + error);
     });
   };
 

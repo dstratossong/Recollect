@@ -16,9 +16,5 @@ angular.module('recollect')
     {filename: 'img/04.jpg', caption: 'Caption 4'}
   ];
 
-  // function changeImage() {
-    
-  // }
-
-  // changeImage();
+  
 }]);
