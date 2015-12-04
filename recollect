@@ -36,7 +36,6 @@ new)
 	echo >> $filename
 	echo "$note" >> $filename
 	echo >> $filename
-	echo >> $filename
 	;;
 all)
 	for entry in `ls ${folder}`; do
