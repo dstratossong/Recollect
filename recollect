@@ -14,22 +14,27 @@ fi
 argument=$1
 folder=~/.recollect/
 date=`date +"%Y-%m-%d"`
-filename="${folder}entry-${date}.txt"
+extension=".txt"
+filename="${folder}entry-${date}${extension}"
 
 case $argument in
 new)
+	# prompting
+	echo "Entry: ${date}"
+	echo "Press Ctrl+D to finish"
+	echo
+
+
+	# recording
+	note=`cat`
+	
+
+	# saving
 	mkdir -p $folder
 
-	echo "Entry: ${date}"
 	echo "Entry: ${date}" >> $filename
-	
-	echo "Press Ctrl+D to finish"
-
-	echo
 	echo >> $filename
-
-	cat >> $filename
-	echo
+	echo $note >> $filename
 	echo >> $filename
 	echo >> $filename
 	;;
@@ -38,6 +43,9 @@ all)
 		cat "${folder}${entry}"
 		echo
 	done
+	;;
+clean)
+	rm ${folder}*${extension}
 	;;
 *)
 	usage
