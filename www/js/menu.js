@@ -11,7 +11,8 @@ angular.module('recollect')
 
   $scope.menuItems = [
     {'name': 'Showcase', 'state': 'app.showcase', 'iconClass': 'ion-play'}, 
-    {'name': 'Capture', 'state': 'app.home', 'iconClass' : 'ion-camera', 'clickHandler': 'getPhoto()'}
+    {'name': 'Capture', 'state': 'app.home', 'iconClass': 'ion-camera', 'clickHandler': 'getPhoto()'},
+    {'name': 'Settings', 'state': 'app.settings', 'iconClass': 'ion-gear-b'}
   ];
 
   $scope.getPhoto = function () {

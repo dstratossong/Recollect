@@ -50,6 +50,14 @@ angular.module('recollect')
           templateUrl: TEMPLATE_DIR_PATH + "about.html"
         }
       }
+    })
+    .state('app.settings', {
+      url: "settings",
+      views: {
+        'appView' : {
+          templateUrl: TEMPLATE_DIR_PATH + "settings.html"
+        }
+      }
     });
     
   $urlRouterProvider.otherwise(HOME_ROUTE_URL + "home");

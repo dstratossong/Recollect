@@ -14,6 +14,24 @@ angular.module('recollect')
   $scope.createMemory = function (memory) {
     $localstorage.unshiftObject("memories", {filename: $scope.newPhoto,
                                           caption: memory.caption});
+    if ($localstorage.getObject("facebook")) {
+      openFB.api({
+        method: 'POST',
+        path: '/me/feed',
+        params: {
+          message: memory.caption,
+          // link: 'http://www.example.com/loc8',
+          name:'Facebook Api Test '
+          // image that share in posted in user timeline
+          // picture: $scope.newPhoto
+        },
+        success: function() {
+          alert('Image Successfully shared in facebook');
+        },
+        error: function (err) {
+          alert('Error: ' + err.message);
+        }});
+    }
     $state.go('app.home');
   };
 
