@@ -34,7 +34,7 @@ new)
 
 	echo "Entry: ${date}" >> $filename
 	echo >> $filename
-	echo $note >> $filename
+	echo "$note" >> $filename
 	echo >> $filename
 	echo >> $filename
 	;;
